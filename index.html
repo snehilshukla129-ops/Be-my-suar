@@ -1,159 +1,240 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Ultra Serious Valentine Proposal</title>
+<meta charset="UTF-8" />
+<title>💘 Valentine Madness 💘</title>
 
 <style>
-body {
-  margin: 0;
-  height: 100vh;
-  background: radial-gradient(circle, #ff5f6d, #ffc371);
-  font-family: 'Comic Sans MS', cursive;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  color: white;
-  text-align: center;
-}
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff4d6d, #ff85a1);
+    font-family: "Comic Sans MS", cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: white;
+    text-align: center;
+  }
 
-.container {
-  animation: pop 1s ease;
-  z-index: 2;
-}
+  .container {
+    z-index: 2;
+  }
 
-h1 {
-  font-size: 2.7rem;
-  animation: wiggle 1.2s infinite;
-}
+  h1 {
+    font-size: 3rem;
+    animation: glow 1.5s infinite alternate;
+  }
 
-.name {
-  font-size: 3rem;
-  font-weight: bold;
-  color: yellow;
-  animation: dramatic 2s infinite;
-}
+  .name {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #ffff00;
+    margin: 10px 0 20px;
+    animation: flash 1s infinite alternate;
+  }
 
-p {
-  font-size: 1.2rem;
-}
+  .buttons {
+    margin-top: 20px;
+    position: relative;
+  }
 
-button {
-  padding: 15px 35px;
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 50px;
-  margin: 10px;
-  cursor: pointer;
-}
+  button {
+    font-size: 1.3rem;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 10px;
+    position: relative;
+    transition: left 0.3s ease, top 0.3s ease;
+  }
 
-#yes {
-  background: #00ffb3;
-  color: black;
-}
+  #yes {
+    background: #00ff99;
+  }
 
-#no {
-  background: red;
-  color: white;
-  position: absolute;
-}
+  #no {
+    background: #ff3333;
+    position: absolute;
+    top: 0;
+    left: 150px;
+  }
 
-.cat {
-  width: 110px;
-  margin: 8px;
-}
+  .cat {
+    position: absolute;
+    width: 200px;
+    pointer-events: none;
+    animation: float 4s linear infinite;
+  }
 
-.heart {
-  position: absolute;
-  font-size: 22px;
-  animation: floatUp 4s linear infinite;
-}
+  .heart, .confetti {
+    position: absolute;
+    font-size: 2rem;
+    animation: fall 3s linear forwards;
+  }
 
-@keyframes wiggle {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(2deg); }
-  50% { transform: rotate(-2deg); }
-  75% { transform: rotate(2deg); }
-  100% { transform: rotate(0deg); }
-}
+  @keyframes glow {
+    from {
+      text-shadow: 0 0 10px hotpink;
+    }
+    to {
+      text-shadow: 0 0 30px red;
+    }
+  }
 
-@keyframes pop {
-  from { transform: scale(0); }
-  to { transform: scale(1); }
-}
+  @keyframes flash {
+    0% {
+      opacity: 1;
+      text-shadow: 0 0 10px yellow;
+    }
+    50% {
+      opacity: 0.5;
+      text-shadow: 0 0 20px orange;
+    }
+    100% {
+      opacity: 1;
+      text-shadow: 0 0 10px yellow;
+    }
+  }
 
-@keyframes dramatic {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.2); opacity: 0.8; }
-  100% { transform: scale(1); opacity: 1; }
-}
+  @keyframes float {
+    from {
+      transform: translateY(100vh);
+    }
+    to {
+      transform: translateY(-200px);
+    }
+  }
 
-@keyframes floatUp {
-  from { transform: translateY(100vh); opacity: 1; }
-  to { transform: translateY(-10vh); opacity: 0; }
-}
+  @keyframes fall {
+    to {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  /* Screen shake animation */
+  @keyframes shake {
+    0% { transform: translate(0,0); }
+    20% { transform: translate(-10px,10px); }
+    40% { transform: translate(10px,-10px); }
+    60% { transform: translate(-10px,10px); }
+    80% { transform: translate(10px,-10px); }
+    100% { transform: translate(0,0); }
+  }
 </style>
 </head>
 
-<body onclick="playMusic()">
+<body>
 
-<audio id="bgMusic" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+<audio id="music" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-cute.mp3" type="audio/mpeg" />
 </audio>
 
-<div class="container" id="main">
-  <h1>🚨 ATTENTION 🚨</h1>
+<audio id="meow-sound">
+  <source src="https://actions.google.com/sounds/v1/animals/cat_meow.ogg" type="audio/ogg" />
+</audio>
 
-  <div>
-    <img class="cat" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
-    <img class="cat" src="https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif">
-    <img class="cat" src="https://media.giphy.com/media/VbnUQpnihPSIgIXuZv/giphy.gif">
+<div class="container" id="main-container">
+  <h1>💖 Will You Be My Valentine? 💖</h1>
+
+  <div class="name">✨BAUWAA✨</div>
+
+  <div class="buttons">
+    <button id="yes">YES 😍</button>
+    <button id="no">NO 😏</button>
   </div>
-
-  <p>This message is for:</p>
-  <div class="name">✨ BAUWAA ✨</div>
-
-  <p>Dancing cats + background music = serious proposal</p>
-
-  <button id="yes" onclick="yesClicked()">YES ❤️</button>
-  <button id="no" onmouseover="moveNo()">NO 💔</button>
 </div>
 
 <script>
-function playMusic() {
-  document.getElementById("bgMusic").play();
-}
+  const music = document.getElementById("music");
+  const meowSound = document.getElementById("meow-sound");
+  const mainContainer = document.getElementById("main-container");
+  const noBtn = document.getElementById("no");
 
-function yesClicked() {
-  document.body.innerHTML = `
-    <div class="container">
-      <h1>🎉 ACCEPTED 🎉</h1>
+  document.addEventListener("click", () => {
+    music.play();
+  }, { once: true });
 
-      <img class="cat" src="https://media.giphy.com/media/13CoXDiaCcCoyk/giphy.gif">
-      <img class="cat" src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
+  const catGifs = [
+    "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",
+    "https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif",
+    "https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif",
+    "https://media.giphy.com/media/l4KibK3JwaVo0CjDO/giphy.gif"
+  ];
 
-      <h2 class="name">MUEHEHE 😈</h2>
-      <p>You are officially my Valentine 💕</p>
-      <p>Cats are proud. Mission complete.</p>
-    </div>
-  `;
-}
+  function spawnCat() {
+    const img = document.createElement("img");
+    img.src = catGifs[Math.floor(Math.random() * catGifs.length)];
+    img.className = "cat";
+    img.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(img);
+    setTimeout(() => img.remove(), 4000);
+  }
+  setInterval(spawnCat, 800);
 
-function moveNo() {
-  const no = document.getElementById("no");
-  no.style.top = Math.random() * 80 + "vh";
-  no.style.left = Math.random() * 80 + "vw";
-}
+  function explodeHearts() {
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.top = "-20px";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 3000);
+    }
+  }
 
-setInterval(() => {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "💖";
-  heart.style.left = Math.random() * 100 + "vw";
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 4000);
-}, 300);
+  function explodeConfetti() {
+    for (let i = 0; i < 20; i++) {
+      const conf = document.createElement("div");
+      conf.className = "confetti";
+      conf.innerHTML = "🎉";
+      conf.style.left = Math.random() * 100 + "vw";
+      conf.style.top = "-20px";
+      document.body.appendChild(conf);
+      setTimeout(() => conf.remove(), 3000);
+    }
+  }
+
+  document.getElementById("yes").onclick = () => {
+    explodeHearts();
+    explodeConfetti();
+    alert("💘 YAYYY!! Valentine ACCEPTED 💘");
+  };
+
+  noBtn.addEventListener("mouseenter", () => {
+    // Play meow sound on hover
+    meowSound.currentTime = 0;
+    meowSound.play();
+
+    // Calculate new random position within viewport (80% width/height)
+    const maxX = window.innerWidth * 0.8;
+    const maxY = window.innerHeight * 0.8;
+
+    let newX, newY;
+    do {
+      newX = Math.random() * maxX;
+      newY = Math.random() * maxY;
+      // Ensure new position is not too close to current position to avoid tiny jumps
+    } while (
+      Math.abs(newX - noBtn.offsetLeft) < 50 &&
+      Math.abs(newY - noBtn.offsetTop) < 50
+    );
+
+    // Move button smoothly
+    noBtn.style.left = newX + "px";
+    noBtn.style.top = newY + "px";
+
+    // Shake screen effect
+    mainContainer.style.animation = "shake 0.5s";
+    setTimeout(() => {
+      mainContainer.style.animation = "";
+    }, 500);
+  });
 </script>
 
 </body>
