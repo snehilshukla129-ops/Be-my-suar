@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Important Valentine Deployment</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      font-family: 'Comic Sans MS', cursive;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .container {
+      animation: pop 1s ease;
+    }
+
+    h1 {
+      font-size: 3rem;
+      animation: shake 1.5s infinite;
+    }
+
+    p {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 50px;
+      margin: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #yes {
+      background: #00ff9d;
+      color: black;
+    }
+
+    #no {
+      background: #ff0000;
+      color: white;
+      position: absolute;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0); }
+      to { transform: scale(1); }
+    }
+
+    @keyframes shake {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(1deg); }
+      50% { transform: rotate(-1deg); }
+      75% { transform: rotate(1deg); }
+      100% { transform: rotate(0deg); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>🚨 CRITICAL ALERT 🚨</h1>
+    <p>You have been selected as my Valentine 💘</p>
+    <p>This action is irreversible.</p>
+
+    <button id="yes" onclick="yesClicked()">YES ❤️</button>
+    <button id="no" onmouseover="moveNo()">NO 💔</button>
+  </div>
+
+  <script>
+    function yesClicked() {
+      document.body.innerHTML = `
+        <h1>🎉 DEPLOYMENT SUCCESS 🎉</h1>
+        <p>You are officially my Valentine 💕</p>
+        <p>Happiness service started...</p>
+        <p>Unlimited hugs enabled 🤗</p>
+      `;
+    }
+
+    function moveNo() {
+      const noBtn = document.getElementById("no");
+      noBtn.style.top = Math.random() * 80 + "vh";
+      noBtn.style.left = Math.random() * 80 + "vw";
+    }
+  </script>
+</body>
+</html>
