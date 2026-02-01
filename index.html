@@ -1,5 +1,4 @@
-
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -141,7 +140,7 @@
 <div class="container" id="main-container">
   <h1>💖 Will You Be My Valentine? 💖</h1>
 
-  <div class="name">✨BAUWAA✨</div>
+  <div class="name">🐽 BAUWAAA 🐽</div>
 
   <div class="buttons">
     <button id="yes">YES 😍</button>
@@ -227,3 +226,15 @@
 
     // Move button smoothly
     noBtn.style.left = newX + "px";
+    noBtn.style.top = newY + "px";
+
+    // Shake screen effect
+    mainContainer.style.animation = "shake 0.5s";
+    setTimeout(() => {
+      mainContainer.style.animation = "";
+    }, 500);
+  });
+</script>
+
+</body>
+</html>
