@@ -3,7 +3,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>💘 BE MY SUAR 💘</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>🐽 BE MY SUAR 🐽</title>
 
 <style>
   body {
@@ -67,9 +68,12 @@
   }
 
   /* Trap Page */
-  #trap-page .dancing-cat {
-    font-size: 10rem;
-    animation: dance 1.2s infinite alternate ease-in-out;
+  #trap-page img.dancing-cat-gif {
+    width: 300px;
+    max-width: 90vw;
+    border-radius: 15px;
+    box-shadow: 0 0 20px yellow;
+    animation: danceGlow 2s infinite alternate ease-in-out;
   }
   #trap-page h1 {
     font-size: 3rem;
@@ -95,17 +99,16 @@
     80% { transform: translate(10px,-10px); }
     100% { transform: translate(0,0); }
   }
-  @keyframes dance {
-    0% { transform: rotate(0deg) translateX(0); }
-    50% { transform: rotate(15deg) translateX(20px); }
-    100% { transform: rotate(0deg) translateX(0); }
+  @keyframes danceGlow {
+    0% { filter: drop-shadow(0 0 10px yellow); }
+    100% { filter: drop-shadow(0 0 25px orange); }
   }
 </style>
 </head>
 <body>
 
 <audio id="music" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_14db965aa7.mp3?filename=cartoon-funny-music-12707.mp3" type="audio/mpeg" />
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/29/audio_3d4a54f4b9.mp3?filename=funny-dramatic-6279.mp3" type="audio/mpeg" />
   Sorry, your browser does not support the audio element.
 </audio>
 
@@ -115,7 +118,7 @@
 
 <!-- Proposal Page -->
 <div id="proposal-page" class="page">
-  <h1>💖 Will You Be my SUAR? 💖</h1>
+  <h1>💖 Will You Be My SUARRRR? 💖</h1>
   <div class="name">🐽 BAUWAAA 🐽</div>
   <div class="buttons">
     <button id="yes">YES 😍</button>
@@ -125,7 +128,7 @@
 
 <!-- Trap Page -->
 <div id="trap-page" class="page hidden">
-  <div class="dancing-cat">🐱💃</div>
+  <img class="dancing-cat-gif" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="Dancing cat gif" />
   <h1>Knew it, a piggy falls in the trap always!</h1>
 </div>
 
