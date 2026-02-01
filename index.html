@@ -1,155 +1,183 @@
-     <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>💘 BE MY SUAR💘</title>
+<meta charset="UTF-8" />
+<title>💘 BE MY SUAR 💘</title>
 
 <style>
-body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(135deg, #ff4d6d, #ff85a1);
-  font-family: "Comic Sans MS", cursive;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  color: white;
-  text-align: center;
-}
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff4d6d, #ff85a1);
+    font-family: "Comic Sans MS", cursive;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+  }
+  .page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease;
+  }
+  .hidden {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+  }
 
-.container {
-  z-index: 2;
-}
+  /* Proposal Page */
+  #proposal-page h1 {
+    font-size: 3rem;
+    animation: glow 1.5s infinite alternate;
+  }
+  #proposal-page .name {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #ffff00;
+    margin: 10px 0 20px;
+    animation: flash 1s infinite alternate;
+  }
+  #proposal-page .buttons {
+    margin-top: 20px;
+    position: relative;
+  }
+  #proposal-page button {
+    font-size: 1.3rem;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 10px;
+    position: relative;
+    transition: left 0.3s ease, top 0.3s ease;
+  }
+  #yes {
+    background: #00ff99;
+  }
+  #no {
+    background: #ff3333;
+    position: absolute;
+    top: 0;
+    left: 150px;
+  }
 
-h1 {
-  font-size: 3rem;
-  animation: glow 1.5s infinite alternate;
-}
+  /* Trap Page */
+  #trap-page .dancing-cat {
+    font-size: 10rem;
+    animation: dance 1.2s infinite alternate ease-in-out;
+  }
+  #trap-page h1 {
+    font-size: 3rem;
+    margin-top: 20px;
+    text-shadow: 0 0 20px yellow;
+  }
 
-.buttons {
-  margin-top: 20px;
-}
-
-button {
-  font-size: 1.3rem;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  margin: 10px;
-}
-
-#yes {
-  background: #00ff99;
-}
-
-#no {
-  background: #ff3333;
-  position: absolute;
-}
-
-.cat {
-  position: absolute;
-  width: 200px;
-  pointer-events: none;
-  animation: float 4s linear infinite;
-}
-
-.heart, .confetti {
-  position: absolute;
-  font-size: 2rem;
-  animation: fall 3s linear forwards;
-}
-
-@keyframes glow {
-  from { text-shadow: 0 0 10px hotpink; }
-  to { text-shadow: 0 0 30px red; }
-}
-
-@keyframes float {
-  from { transform: translateY(100vh); }
-  to { transform: translateY(-200px); }
-}
-
-@keyframes fall {
-  to { transform: translateY(100vh); opacity: 0; }
-}
+  /* Animations */
+  @keyframes glow {
+    from { text-shadow: 0 0 10px hotpink; }
+    to { text-shadow: 0 0 30px red; }
+  }
+  @keyframes flash {
+    0% { opacity: 1; text-shadow: 0 0 10px yellow; }
+    50% { opacity: 0.5; text-shadow: 0 0 20px orange; }
+    100% { opacity: 1; text-shadow: 0 0 10px yellow; }
+  }
+  @keyframes shake {
+    0% { transform: translate(0,0); }
+    20% { transform: translate(-10px,10px); }
+    40% { transform: translate(10px,-10px); }
+    60% { transform: translate(-10px,10px); }
+    80% { transform: translate(10px,-10px); }
+    100% { transform: translate(0,0); }
+  }
+  @keyframes dance {
+    0% { transform: rotate(0deg) translateX(0); }
+    50% { transform: rotate(15deg) translateX(20px); }
+    100% { transform: rotate(0deg) translateX(0); }
+  }
 </style>
 </head>
-
 <body>
 
 <audio id="music" loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-cute.mp3" type="audio/mpeg">
+  <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_14db965aa7.mp3?filename=cartoon-funny-music-12707.mp3" type="audio/mpeg" />
+  Sorry, your browser does not support the audio element.
 </audio>
 
-<div class="container">
-  <h1>💖 Will You Be My Valentine? 💖</h1>
+<audio id="meow-sound">
+  <source src="https://actions.google.com/sounds/v1/animals/cat_meow.ogg" type="audio/ogg" />
+</audio>
 
+<!-- Proposal Page -->
+<div id="proposal-page" class="page">
+  <h1>💖 Will You Be My Valentine? 💖</h1>
+  <div class="name">🐽 BAUWAAA 🐽</div>
   <div class="buttons">
     <button id="yes">YES 😍</button>
     <button id="no">NO 😏</button>
   </div>
 </div>
 
+<!-- Trap Page -->
+<div id="trap-page" class="page hidden">
+  <div class="dancing-cat">🐱💃</div>
+  <h1>Knew it, a piggy falls in the trap always!</h1>
+</div>
+
 <script>
-const music = document.getElementById("music");
-document.addEventListener("click", () => music.play(), { once: true });
+  const music = document.getElementById('music');
+  const meowSound = document.getElementById('meow-sound');
+  const proposalPage = document.getElementById('proposal-page');
+  const trapPage = document.getElementById('trap-page');
+  const noBtn = document.getElementById('no');
+  const yesBtn = document.getElementById('yes');
 
-const catGifs = [
-  "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",
-  "https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif",
-  "https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif",
-  "https://media.giphy.com/media/l4KibK3JwaVo0CjDO/giphy.gif"
-];
-
-function spawnCat() {
-  const img = document.createElement("img");
-  img.src = catGifs[Math.floor(Math.random() * catGifs.length)];
-  img.className = "cat";
-  img.style.left = Math.random() * 100 + "vw";
-  document.body.appendChild(img);
-  setTimeout(() => img.remove(), 4000);
-}
-setInterval(spawnCat, 800);
-
-function explodeHearts() {
-  for (let i = 0; i < 20; i++) {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.top = "-20px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 3000);
+  // Play music on first user interaction anywhere on the page
+  function playMusic() {
+    music.play().catch(() => {
+      console.log('Autoplay prevented, try interacting manually');
+    });
+    document.removeEventListener('click', playMusic);
   }
-}
+  document.addEventListener('click', playMusic);
 
-function explodeConfetti() {
-  for (let i = 0; i < 20; i++) {
-    const conf = document.createElement("div");
-    conf.className = "confetti";
-    conf.innerHTML = "🎉";
-    conf.style.left = Math.random() * 100 + "vw";
-    conf.style.top = "-20px";
-    document.body.appendChild(conf);
-    setTimeout(() => conf.remove(), 3000);
-  }
-}
+  // YES button switches page
+  yesBtn.onclick = () => {
+    proposalPage.classList.add('hidden');
+    trapPage.classList.remove('hidden');
+  };
 
-document.getElementById("yes").onclick = () => {
-  explodeHearts();
-  explodeConfetti();
-  alert("💘 YAYYY!! Valentine ACCEPTED 💘");
-};
+  // NO button runs away with meow & screen shake
+  noBtn.addEventListener('mouseenter', () => {
+    meowSound.currentTime = 0;
+    meowSound.play();
 
-const noBtn = document.getElementById("no");
-noBtn.addEventListener("mouseover", () => {
-  noBtn.style.left = Math.random() * 80 + "vw";
-  noBtn.style.top = Math.random() * 80 + "vh";
-});
+    const maxX = window.innerWidth * 0.8;
+    const maxY = window.innerHeight * 0.8;
+
+    let newX, newY;
+    do {
+      newX = Math.random() * maxX;
+      newY = Math.random() * maxY;
+    } while (
+      Math.abs(newX - noBtn.offsetLeft) < 50 &&
+      Math.abs(newY - noBtn.offsetTop) < 50
+    );
+
+    noBtn.style.left = newX + 'px';
+    noBtn.style.top = newY + 'px';
+
+    proposalPage.style.animation = 'shake 0.5s';
+    setTimeout(() => {
+      proposalPage.style.animation = '';
+    }, 500);
+  });
 </script>
 
 </body>
-</html> 
+</html>
