@@ -14,6 +14,7 @@
     color: white;
     text-align: center;
     overflow: hidden;
+    position: relative;
   }
   .page {
     height: 100vh;
@@ -30,7 +31,6 @@
     top: 0; left: 0; right: 0; bottom: 0;
   }
 
-  /* Proposal Page */
   #proposal-page h1 {
     font-size: 3rem;
     animation: glow 1.5s infinite alternate;
@@ -72,7 +72,6 @@
     left: 180px;
   }
 
-  /* Trap Page */
   #trap-page img.dancing-cat-gif {
     width: 320px;
     max-width: 90vw;
@@ -84,6 +83,24 @@
     font-size: 3rem;
     margin-top: 20px;
     text-shadow: 0 0 20px yellow;
+  }
+
+  /* Cats floating */
+  .floating-cat {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    pointer-events: none;
+    user-select: none;
+    animation-name: floatUpDown;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes floatUpDown {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
   }
 
   /* Animations */
@@ -112,21 +129,15 @@
 </head>
 <body>
 
-<!-- Music: funny drumbeat loop from Pixabay (free, CORS-friendly) -->
-<audio id="music" loop preload="auto">
-  <source src="https://cdn.pixabay.com/download/audio/2023/01/27/audio_aa8180f5a2.mp3?filename=funny-drum-loop-119272.mp3" type="audio/mpeg" />
-  Sorry, your browser does not support the audio element.
-</audio>
+<!-- FUNKY DRUM LOOP MP3 for wide compatibility -->
+<audio id="music" loop preload="auto" src="https://cdn.pixabay.com/download/audio/2023/03/26/audio_8a6d108f02.mp3?filename=upbeat-drum-loop-12537.mp3"></audio>
 
-<!-- Meow sound from GitHub CDN (direct raw link to a public repo audio file) -->
-<audio id="meow-sound" preload="auto">
-  <source src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav" type="audio/wav" />
-  Sorry, your browser does not support the audio element.
-</audio>
+<!-- MEOW MP3 for best Mac Safari compatibility -->
+<audio id="meow-sound" preload="auto" src="https://cdn.pixabay.com/download/audio/2023/03/29/audio_02f7e81f30.mp3?filename=cat-meow-1-4997.mp3"></audio>
 
 <!-- Proposal Page -->
 <div id="proposal-page" class="page">
-  <h1>💖 Will You Be My Valentine? 💖</h1>
+  <h1>💖 Will You Be My Suar? 💖</h1>
   <div class="name">✨ BAUWAA ✨</div>
   <div class="buttons">
     <button id="yes">YES 😍</button>
@@ -157,20 +168,10 @@
   }
   document.addEventListener('click', playMusic);
 
-  // YES button switches page
-  yesBtn.onclick = () => {
-    proposalPage.classList.add('hidden');
-    trapPage.classList.remove('hidden');
-  };
-
   // NO button runs away EVERY time mouse enters
   noBtn.addEventListener('mouseenter', () => {
-    try {
-      meowSound.currentTime = 0;
-      meowSound.play();
-    } catch (e) {
-      console.warn('Meow sound play failed:', e);
-    }
+    meowSound.currentTime = 0;
+    meowSound.play();
 
     const maxX = window.innerWidth - noBtn.offsetWidth - 20;
     const maxY = window.innerHeight - noBtn.offsetHeight - 20;
@@ -193,12 +194,90 @@
     }, 500);
   });
 
-  // Initialize NO button position so it doesn't jump on page load
+  // YES button switches page and triggers confetti + cats
+  yesBtn.onclick = () => {
+    proposalPage.classList.add('hidden');
+    trapPage.classList.remove('hidden');
+    startConfetti();
+    spawnFloatingCats();
+  };
+
+  // Initialize NO button position on load
   window.addEventListener('load', () => {
     noBtn.style.left = '180px';
     noBtn.style.top = '10px';
   });
+
+  // CONFETTI CODE adapted from simple JS confetti
+  function startConfetti() {
+    const colors = ['#ff0a54', '#ff477e', '#ff85a1', '#fbb1b1', '#f9bec7', '#a60303'];
+    const confettiCount = 150;
+
+    for(let i = 0; i < confettiCount; i++) {
+      const confetti = document.createElement('div');
+      confetti.style.position = 'fixed';
+      confetti.style.width = '10px';
+      confetti.style.height = '10px';
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.top = Math.random() * window.innerHeight + 'px';
+      confetti.style.left = Math.random() * window.innerWidth + 'px';
+      confetti.style.opacity = 1;
+      confetti.style.borderRadius = '50%';
+      confetti.style.pointerEvents = 'none';
+      confetti.style.zIndex = 9999;
+
+      confetti.style.animation = `confettiFall ${2 + Math.random() * 3}s linear forwards`;
+      confetti.style.animationDelay = (Math.random() * 1.5) + 's';
+
+      document.body.appendChild(confetti);
+
+      // Remove confetti after animation
+      confetti.addEventListener('animationend', () => confetti.remove());
+    }
+  }
+
+  // Floating cats
+  let floatingCatsInterval;
+
+  function spawnFloatingCats() {
+    const catUrls = [
+      "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",
+      "https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif",
+      "https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
+    ];
+
+    floatingCatsInterval = setInterval(() => {
+      const cat = document.createElement('img');
+      cat.src = catUrls[Math.floor(Math.random() * catUrls.length)];
+      cat.className = 'floating-cat';
+      cat.style.left = Math.random() * (window.innerWidth - 80) + 'px';
+      cat.style.top = window.innerHeight + 80 + 'px';
+      cat.style.animationDuration = (4 + Math.random() * 3) + 's';
+      cat.style.animationTimingFunction = 'ease-in-out';
+      cat.style.zIndex = 10000;
+
+      document.body.appendChild(cat);
+
+      // Animate floating up and fade out
+      cat.animate([
+        { transform: 'translateY(0)', opacity: 1 },
+        { transform: 'translateY(-120vh)', opacity: 0 }
+      ], {
+        duration: 7000 + Math.random() * 3000,
+        easing: 'ease-in-out'
+      }).onfinish = () => cat.remove();
+    }, 700);
+  }
 </script>
+
+<style>
+  @keyframes confettiFall {
+    to {
+      transform: translateY(110vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+</style>
 
 </body>
 </html>
