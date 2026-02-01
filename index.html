@@ -1,97 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Important Valentine Deployment</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #ff416c, #ff4b2b);
-      font-family: 'Comic Sans MS', cursive;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      overflow: hidden;
-      text-align: center;
-    }
+<meta charset="UTF-8">
+<title>Ultra Serious Valentine Proposal</title>
 
-    .container {
-      animation: pop 1s ease;
-    }
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle, #ff5f6d, #ffc371);
+  font-family: 'Comic Sans MS', cursive;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: white;
+  text-align: center;
+}
 
-    h1 {
-      font-size: 3rem;
-      animation: shake 1.5s infinite;
-    }
+.container {
+  animation: pop 1s ease;
+  z-index: 2;
+}
 
-    p {
-      font-size: 1.3rem;
-      margin-bottom: 20px;
-    }
+h1 {
+  font-size: 2.7rem;
+  animation: wiggle 1.2s infinite;
+}
 
-    button {
-      padding: 15px 30px;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 50px;
-      margin: 10px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+.name {
+  font-size: 3rem;
+  font-weight: bold;
+  color: yellow;
+  animation: dramatic 2s infinite;
+}
 
-    #yes {
-      background: #00ff9d;
-      color: black;
-    }
+p {
+  font-size: 1.2rem;
+}
 
-    #no {
-      background: #ff0000;
-      color: white;
-      position: absolute;
-    }
+button {
+  padding: 15px 35px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 50px;
+  margin: 10px;
+  cursor: pointer;
+}
 
-    @keyframes pop {
-      from { transform: scale(0); }
-      to { transform: scale(1); }
-    }
+#yes {
+  background: #00ffb3;
+  color: black;
+}
 
-    @keyframes shake {
-      0% { transform: rotate(0deg); }
-      25% { transform: rotate(1deg); }
-      50% { transform: rotate(-1deg); }
-      75% { transform: rotate(1deg); }
-      100% { transform: rotate(0deg); }
-    }
-  </style>
+#no {
+  background: red;
+  color: white;
+  position: absolute;
+}
+
+.cat {
+  width: 110px;
+  margin: 8px;
+}
+
+.heart {
+  position: absolute;
+  font-size: 22px;
+  animation: floatUp 4s linear infinite;
+}
+
+@keyframes wiggle {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(2deg); }
+  50% { transform: rotate(-2deg); }
+  75% { transform: rotate(2deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes pop {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+@keyframes dramatic {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes floatUp {
+  from { transform: translateY(100vh); opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
 </head>
 
-<body>
-  <div class="container">
-    <h1>🚨 CRITICAL ALERT 🚨</h1>
-    <p>You have been selected as my Valentine 💘</p>
-    <p>This action is irreversible.</p>
+<body onclick="playMusic()">
 
-    <button id="yes" onclick="yesClicked()">YES ❤️</button>
-    <button id="no" onmouseover="moveNo()">NO 💔</button>
+<audio id="bgMusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container" id="main">
+  <h1>🚨 ATTENTION 🚨</h1>
+
+  <div>
+    <img class="cat" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
+    <img class="cat" src="https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif">
+    <img class="cat" src="https://media.giphy.com/media/VbnUQpnihPSIgIXuZv/giphy.gif">
   </div>
 
-  <script>
-    function yesClicked() {
-      document.body.innerHTML = `
-        <h1>🎉 DEPLOYMENT SUCCESS 🎉</h1>
-        <p>You are officially my Valentine 💕</p>
-        <p>Happiness service started...</p>
-        <p>Unlimited hugs enabled 🤗</p>
-      `;
-    }
+  <p>This message is for:</p>
+  <div class="name">✨ BAUWAA ✨</div>
 
-    function moveNo() {
-      const noBtn = document.getElementById("no");
-      noBtn.style.top = Math.random() * 80 + "vh";
-      noBtn.style.left = Math.random() * 80 + "vw";
-    }
-  </script>
+  <p>Dancing cats + background music = serious proposal</p>
+
+  <button id="yes" onclick="yesClicked()">YES ❤️</button>
+  <button id="no" onmouseover="moveNo()">NO 💔</button>
+</div>
+
+<script>
+function playMusic() {
+  document.getElementById("bgMusic").play();
+}
+
+function yesClicked() {
+  document.body.innerHTML = `
+    <div class="container">
+      <h1>🎉 ACCEPTED 🎉</h1>
+
+      <img class="cat" src="https://media.giphy.com/media/13CoXDiaCcCoyk/giphy.gif">
+      <img class="cat" src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
+
+      <h2 class="name">MUEHEHE 😈</h2>
+      <p>You are officially my Valentine 💕</p>
+      <p>Cats are proud. Mission complete.</p>
+    </div>
+  `;
+}
+
+function moveNo() {
+  const no = document.getElementById("no");
+  no.style.top = Math.random() * 80 + "vh";
+  no.style.left = Math.random() * 80 + "vw";
+}
+
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 4000);
+}, 300);
+</script>
+
 </body>
 </html>
