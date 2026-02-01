@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>💘 Valentine Madness 💘</title>
+<title>💘 BATLI Madness 💘</title>
 
 <style>
   body {
@@ -45,6 +45,8 @@
   #proposal-page .buttons {
     margin-top: 20px;
     position: relative;
+    height: 60px;
+    width: 320px;
   }
   #proposal-page button {
     font-size: 1.3rem;
@@ -55,18 +57,19 @@
     margin: 10px;
     position: absolute;
     transition: left 0.3s ease, top 0.3s ease;
+    user-select: none;
   }
   #yes {
     background: #00ff99;
     position: relative;
-    left: 0 !important;
-    top: 0 !important;
+    left: 20px !important;
+    top: 10px !important;
     margin: 10px !important;
   }
   #no {
     background: #ff3333;
-    top: 0;
-    left: 150px;
+    top: 10px;
+    left: 180px;
   }
 
   /* Trap Page */
@@ -109,19 +112,21 @@
 </head>
 <body>
 
+<!-- Music: funny drumbeat loop from Pixabay (free, CORS-friendly) -->
 <audio id="music" loop preload="auto">
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/26/audio_31dbdf0140.mp3?filename=drum-loop-13342.mp3" type="audio/mpeg" />
+  <source src="https://cdn.pixabay.com/download/audio/2023/01/27/audio_aa8180f5a2.mp3?filename=funny-drum-loop-119272.mp3" type="audio/mpeg" />
   Sorry, your browser does not support the audio element.
 </audio>
 
+<!-- Meow sound from GitHub CDN (direct raw link to a public repo audio file) -->
 <audio id="meow-sound" preload="auto">
-  <source src="https://cdn.pixabay.com/audio/2023/03/29/audio_02f7e81f30.mp3" type="audio/mpeg" />
+  <source src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav" type="audio/wav" />
   Sorry, your browser does not support the audio element.
 </audio>
 
 <!-- Proposal Page -->
 <div id="proposal-page" class="page">
-  <h1>💖 Will You Be My SUAR 💖</h1>
+  <h1>💖 Will You Be My SUARRR ? 💖</h1>
   <div class="name">🐽 BAUWAA 🐽</div>
   <div class="buttons">
     <button id="yes">YES 😍</button>
@@ -160,8 +165,12 @@
 
   // NO button runs away EVERY time mouse enters
   noBtn.addEventListener('mouseenter', () => {
-    meowSound.currentTime = 0;
-    meowSound.play();
+    try {
+      meowSound.currentTime = 0;
+      meowSound.play();
+    } catch (e) {
+      console.warn('Meow sound play failed:', e);
+    }
 
     const maxX = window.innerWidth - noBtn.offsetWidth - 20;
     const maxY = window.innerHeight - noBtn.offsetHeight - 20;
@@ -186,8 +195,8 @@
 
   // Initialize NO button position so it doesn't jump on page load
   window.addEventListener('load', () => {
-    noBtn.style.left = '150px';
-    noBtn.style.top = '0px';
+    noBtn.style.left = '180px';
+    noBtn.style.top = '10px';
   });
 </script>
 
